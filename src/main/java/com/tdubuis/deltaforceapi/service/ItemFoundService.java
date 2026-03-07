@@ -39,7 +39,7 @@ public class ItemFoundService
 		return itemFoundRepository.findAllItemFoundWithFilters(playerId, redId, fromDate, toDate);
 	}
 
-	public List<Player> redFound(Long redId, Long foundBy, Long giveAt)
+	public List<Player> redFound(Long redId, Long foundBy, Long giveAt, Boolean useRotation)
 	{
 		RedItem redItem = redItemRepository.findById(redId).orElseThrow(() -> new IllegalArgumentException("RedItem not found for redId=" + redId));
 		Player playerFoundBy = playerRepository.findById(foundBy).orElseThrow(() -> new IllegalArgumentException("Player not found for foundBy=" + foundBy));
@@ -49,15 +49,16 @@ public class ItemFoundService
 		RedInCache redInCacheForGivePlayer = redInCacheRepository.findById(redInCacheId).orElse(new RedInCache(redInCacheId, redItem, playerGiveAt, RedLvlInCache.NONE));
 
 		List<Player> players;
-		if (redInCacheForGivePlayer.upgradeLvl()) //Change le lvl
+		if (redInCacheForGivePlayer.upgradeLvl() && useRotation) //Change le lvl
 		{
 			players = playerService.changeRotation(giveAt);
-			redInCacheRepository.save(redInCacheForGivePlayer);
 		}
 		else
 		{
 			players = playerRepository.findAllByOrderByRotationAsc();
 		}
+
+		redInCacheRepository.save(redInCacheForGivePlayer);
 
 		ItemFound itemFound = new ItemFound();
 		itemFound.setItem(redItem);

@@ -58,7 +58,7 @@ public class DeltaForceAPIController
 			@RequestParam(required = false) Long playerId,
 			@RequestParam(required = false) Long redId,
 			@RequestParam(required = false) RedLvlInCache lvl)
-	{//TODO Faire des fake data
+	{
 		return redInCacheService.getAllRedInCache(playerId, redId, lvl);
 	}
 
@@ -69,16 +69,16 @@ public class DeltaForceAPIController
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fromDate,
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDate
 	)
-	{//TODO Faire des fake data
+	{
 		return itemFoundService.getAllItemFound(playerId, redId, fromDate, toDate);
 	}
 
 
 	// MAIN POST METHOD
 	@PostMapping("/redFound")
-	public List<Player> redFound(@RequestParam Long redId, @RequestParam Long foundBy, @RequestParam Long giveAt)
+	public List<Player> redFound(@RequestParam Long redId, @RequestParam Long foundBy, @RequestParam Long giveAt, @RequestParam(required = false, defaultValue = "true") Boolean useRotation)
 	{
-		return itemFoundService.redFound(redId, foundBy, giveAt);
+		return itemFoundService.redFound(redId, foundBy, giveAt, useRotation);
 	}
 
 }
