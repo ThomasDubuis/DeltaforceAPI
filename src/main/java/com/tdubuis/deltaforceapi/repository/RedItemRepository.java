@@ -1,11 +1,11 @@
 package com.tdubuis.deltaforceapi.repository;
 
+import com.tdubuis.deltaforceapi.entity.redItem.RedItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.tdubuis.deltaforceapi.entity.RedItem;
+import java.util.UUID;
 
 @Repository
-public interface RedItemRepository extends JpaRepository<RedItem, Long>
-{
-}
+public interface RedItemRepository extends JpaRepository<RedItem, UUID>
+{}

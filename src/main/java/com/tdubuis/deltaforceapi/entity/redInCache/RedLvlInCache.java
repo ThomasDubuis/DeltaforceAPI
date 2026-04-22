@@ -1,4 +1,4 @@
-package com.tdubuis.deltaforceapi.entity;
+package com.tdubuis.deltaforceapi.entity.redInCache;
 
 public enum RedLvlInCache
 {

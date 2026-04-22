@@ -1,5 +1,7 @@
-package com.tdubuis.deltaforceapi.entity;
+package com.tdubuis.deltaforceapi.entity.redInCache;
 
+import com.tdubuis.deltaforceapi.entity.Player;
+import com.tdubuis.deltaforceapi.entity.redItem.RedItem;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

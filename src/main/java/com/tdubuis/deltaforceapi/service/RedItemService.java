@@ -1,11 +1,13 @@
 package com.tdubuis.deltaforceapi.service;
 
-import java.util.List;
-
+import com.tdubuis.deltaforceapi.entity.redItem.RedItem;
+import com.tdubuis.deltaforceapi.exception.ApiException;
+import com.tdubuis.deltaforceapi.repository.RedItemRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.tdubuis.deltaforceapi.entity.RedItem;
-import com.tdubuis.deltaforceapi.repository.RedItemRepository;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RedItemService
@@ -20,6 +22,11 @@ public class RedItemService
 	public List<RedItem> getAllRedItems()
 	{
 		return redItemRepository.findAll();
+	}
+
+	public RedItem getRedItemById(UUID redId)
+	{
+		return redItemRepository.findById(redId).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "RedItem not found"));
 	}
 
 }
